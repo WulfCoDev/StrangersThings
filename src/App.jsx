@@ -1,13 +1,14 @@
 
 import './App.css'
+import PostsView from './components/PostsView'
 
 function App() {
 
 
   return (
-    <>
-      <h1>Stranger's Things</h1>
-    </>
+    <div>
+        <PostsView />
+    </div>
   )
 }
 
