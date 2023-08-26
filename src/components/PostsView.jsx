@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 
-
 const APIURL = `https://strangers-things.herokuapp.com/api/2302-ACC-ET-WEB-PT-D`;
+
 
 function PostsView () {
     const [posts, setPosts] = useState ([]);

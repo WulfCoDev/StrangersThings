@@ -1,16 +1,20 @@
 
 import './App.css'
-import PostsView from './components/PostsView'
-import RegistrationForm from './components/RegistrationForm'
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Switch from './components/Routes';
 
 function App() {
 
 
   return (
-    <div>
-        <PostsView />
-        <RegistrationForm />
-    </div>
+    <Router>
+      <div>
+        <Navbar />
+        <Switch />
+      </div>
+    </Router>
   )
 }
 
