@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import NewPostForm from './NewPostForm';
 
 const APIURL = `https://strangers-things.herokuapp.com/api/2302-ACC-ET-WEB-PT-D`;
 
@@ -28,9 +29,15 @@ function PostsView () {
         </div>
     ));
 
+    const handlePostCreated = (newPost) => {
+        // Update state with the new post
+        setPosts([...posts, newPost]);
+      };
+
     return (
         <div>
             {postItems}
+            <NewPostForm onPostCreated={handlePostCreated} />
         </div>
     );
 }
