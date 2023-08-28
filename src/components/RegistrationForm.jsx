@@ -7,16 +7,27 @@ const RegistrationForm = () => {
   const handleRegistration = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-
+  
+    const registrationData = {
+      user: {
+        username: formData.get('username'),
+        password: formData.get('password'),
+      }
+    };
+  
     try {
       const response = await fetch(APIURL + '/users/register', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(registrationData),
       });
-
+  
       if (response.ok) {
         const data = await response.json();
-        console.log (data.token);
+        console.log(data.token);
+        console.log(data);
         logIn(data.token);
       } else {
         // Handle registration error
