@@ -2,11 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logIn } from './auth';
 
-const APIURL = `https://strangers-things.herokuapp.com/api/2302-ACC-ET-WEB-PT-D`;
 
 const LoginForm = () => {
-  const navigate = useNavigate();
-
   const handleLogin = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -29,9 +26,6 @@ const LoginForm = () => {
         const data = await response.json();
         console.log(data);
         logIn(data.token);
-
-        navigate('/userdashboard');
-
       } else {
         
       }
