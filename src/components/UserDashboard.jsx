@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { isLoggedIn } from './auth';
+import { isLoggedIn, makeHeaders, getToken } from './auth';
 
 const APIURL = `https://strangers-things.herokuapp.com/api/2302-ACC-ET-WEB-PT-D`;
 
@@ -14,17 +14,26 @@ const UserDashboard = () => {
 
   const fetchUserData = async () => {
     try {
+      console.log('Fetching user data with token:', getToken());
       const response = await fetch(APIURL + `/users/me`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        },
+        headers: makeHeaders(),
       });
 
       if (response.ok) {
         const data = await response.json();
-        setUserData(data.user);
+
+        // Assuming the data structure is as follows
+        const { cohort, messages, posts, username } = data.data;
+
+        // Now you can access and display this data in your component
+        setUserData({
+          cohort,
+          messages,
+          posts,
+          username,
+        });
       } else {
+        console.error('API Error:', response.status, response.statusText);
         // Handle error
       }
     } catch (error) {

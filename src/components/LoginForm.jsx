@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logIn } from './auth';
 
+const APIURL = `https://strangers-things.herokuapp.com/api/2302-ACC-ET-WEB-PT-D`;
 
 const LoginForm = () => {
+  const [token, setToken] = useState('');
+  const navigate = useNavigate();
+
   const handleLogin = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -24,10 +28,11 @@ const LoginForm = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
-        logIn(data.token);
+        logIn(data.data.token);
+        console.log('Logged in with token:', data.data.token);
+        navigate('/authpostsview');
       } else {
-        
+        // Handle login error
       }
     } catch (error) {
       console.error('Error logging in:', error);
@@ -36,8 +41,8 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={handleLogin}>
-      <input type="text" placeholder='Username' name="username" required />
-      <input type="password" placeholder='Password' name="password" required />
+      <input type="text" placeholder="Username" name="username" required />
+      <input type="password" placeholder="Password" name="password" required />
       <button type="submit">Login</button>
     </form>
   );
