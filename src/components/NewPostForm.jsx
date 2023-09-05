@@ -1,33 +1,37 @@
-import React, { useState } from 'react';
-import { makeHeaders } from './auth';
+import React from 'react';
+import { makeHeaders } from './auth'; // Import makeHeaders from your auth module
 
 const APIURL = `https://strangers-things.herokuapp.com/api/2302-ACC-ET-WEB-PT-D`;
 
 const NewPostForm = ({ onPostCreated }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState(''); // Add price state
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    const formData = new FormData(event.target);
     try {
-      const response = await fetch(APIURL + '/posts', {
+      const response = await fetch('https://strangers-things.herokuapp.com/api/2302-ACC-ET-WEB-PT-D/posts', {
         method: 'POST',
-        headers: makeHeaders(),
-        body: JSON.stringify({ title, description, price }), // Include price
+        headers: makeHeaders(), // Use makeHeaders to include the Authorization header
+        body: JSON.stringify({
+          post: {
+            title: formData.get('title'),
+            description: formData.get('description'),
+            price: formData.get('price'),
+            location: formData.get('location'),
+            willDeliver: formData.get('willDeliver'),
+          },
+        }),
       });
 
       if (response.ok) {
         const newPost = await response.json();
-        // Update state with the new post
+        console.log(newPost);
         onPostCreated(newPost);
-        // Clear form fields
-        setTitle('');
-        setDescription('');
-        setPrice('');
+
       } else {
         // Handle error
+        console.error('Error creating post:', response.statusText);
       }
     } catch (error) {
       console.error('Error creating post:', error);
@@ -39,25 +43,46 @@ const NewPostForm = ({ onPostCreated }) => {
       <label>Title</label>
       <input
         type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        name="title"
+        
+        
         required
       />
 
       <label>Description</label>
       <textarea
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
+        name="description"
+        
+        
         required
       ></textarea>
 
-      <label>Price</label> {/* Add price input */}
+      <label>Price</label>
       <input
         type="text"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
+        name="price"
+        
+        
         required
       />
+      <label>Price</label>
+      <input
+        type="text"
+        name="price"
+        
+        
+        required
+      />
+
+      <label>
+        Will Deliver
+        </label>
+        <input
+          type="checkbox"
+          name="willDeliver"
+          
+         
+        />
 
       <button type="submit">Create Post</button>
     </form>
