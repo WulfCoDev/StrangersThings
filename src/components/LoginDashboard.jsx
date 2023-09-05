@@ -2,7 +2,7 @@ import React from 'react';
 import RegistrationForm from './RegistrationForm';
 import LoginForm from './LoginForm';
 
-const Dashboard = () => {
+const LoginDashboard = () => {
   return (
     <div>
       <h1>Registration</h1>
@@ -14,4 +14,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default LoginDashboard;

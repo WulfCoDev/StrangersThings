@@ -1,9 +1,11 @@
 import React from 'react';
 import { logIn } from './auth';
+import { useNavigate } from 'react-router-dom';
 
 const APIURL = `https://strangers-things.herokuapp.com/api/2302-ACC-ET-WEB-PT-D`;
 
 const RegistrationForm = () => {
+  const navigate = useNavigate();
   const handleRegistration = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -29,8 +31,10 @@ const RegistrationForm = () => {
         console.log(data.token);
         console.log(data);
         logIn(data.token);
+
+        navigate('/userdashboard');
       } else {
-        // Handle registration error
+        
       }
     } catch (error) {
       console.error('Error registering:', error);

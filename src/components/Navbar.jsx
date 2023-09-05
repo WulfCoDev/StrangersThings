@@ -6,10 +6,13 @@ const Navbar = () => {
     <nav>
       <ul>
         <li>
-          <Link to="/dashboard">Register or Login</Link>
+          <Link to="/logindashboard">Register or Login</Link>
         </li>
         <li>
-          <Link to="/postsview">Posts</Link>
+          <Link to="/">Posts</Link>
+        </li>
+        <li>
+          <Link to="/userdashboard">Profile</Link>
         </li>
         {/* Add more navigation links here */}
       </ul>
