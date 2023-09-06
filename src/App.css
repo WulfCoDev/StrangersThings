@@ -4,54 +4,78 @@
   padding: 2rem;
   text-align: center;
 }
-/* Navbar Styles */
-nav {
-  background-color: #7c8483;
+/* Navbar Item Styles */
+.navbar {
+  background-color: #424242;
   padding: 10px;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-}
-
-li {
+.navbar-item {
   margin: 0 10px;
-}
-
-a {
   text-decoration: none;
-  color: #fff;
+  color: #ffffff;
   font-weight: bold;
   font-size: 18px;
   transition: color 0.3s ease;
-  padding: 10px 20px; /* Add padding */
-  background-color: #556666; /* Add background color */
-  border-radius: 5px; /* Round the corners */
+  padding: 10px 20px;
+  background-color: #556666; 
+  border-radius: 5px; 
 }
 
-a:hover {
-  color: #71a2b6;
-  background-color: #445555; /* Slightly darker background on hover */
+/* Profile Link Styles */
+.profile-link {
+  margin-right: 20px;
+  text-decoration: none;
+  padding: 10px 20px;
+  border: none;
+  background-color: #556666;
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 5px;
+
 }
 
-/* Media query for mobile responsiveness */
-@media (max-width: 768px) {
-  ul {
+/* Logout Button Styles */
+button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #ff4d4d;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+/* Updated Navbar Styles */
+.navbar-list {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  margin-right: auto;
+  color: #a8e3fa;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+/* Mobile Responsiveness for Navbar */
+@media only screen and (max-width: 768px) {
+  .navbar-list {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
   }
 
-  li {
+  .navbar-item {
     margin: 10px 0;
   }
 
-  a {
-    width: 100%;
-    text-align: center;
+  .profile-link {
+    margin-right: 0;
+    margin-bottom: 10px;
   }
 }
 
@@ -60,7 +84,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f2f2f2;
+  background-color: #a8e3fa;
 }
 
 /* UserDashboard Styles */
@@ -184,7 +208,7 @@ body {
   background-color: #ffffff;
   padding: 1rem;
   border-radius: 5px;
-  width: 300px;
+  width: auto;
   margin: auto;
 }
 
@@ -245,6 +269,19 @@ body {
 .post-item p {
   font-size: 1rem;
   color: #666;
+}
+.posts-view button {
+  padding: 10px 20px;
+  border: none;
+  background-color: rgb(98, 166, 243);
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+  margin: 15px;
+}
+
+.create-post {
+  display: flex;
 }
 
 

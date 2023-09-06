@@ -5,22 +5,28 @@ import LogoutButton from './LogoutButton';
 
 const Navbar = () => {
   return (
-    <nav>
-      <ul>
-        <li>
+    <nav className='navbar'>
+      <ul className="navbar-list">
+      <div className='logo'><h1>Strangers Things</h1></div>
+        <li className="navbar-item">
+          <Link className="profile-link" to="/">Posts</Link>
+        </li>
+        <li className="navbar-item">
           {isLoggedIn() ? (
             <>
-              <LogoutButton /> 
-              <Link to="/userdashboard">Profile</Link>
+              <Link className="profile-link" to="/userdashboard">Profile</Link>
             </>
           ) : (
-            <Link to="/logindashboard">Register or Login</Link>
+            <Link className="profile-link" to="/logindashboard">Register</Link>
           )}
         </li>
         <li>
-          <Link to="/">Posts</Link>
+        {isLoggedIn() ? (
+            <>
+              <LogoutButton />
+            </>
+          ) : (<Link className="profile-link" to="/logindashboard">Login</Link>)}
         </li>
-        
       </ul>
     </nav>
   );

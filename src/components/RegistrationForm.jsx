@@ -1,4 +1,3 @@
-import React from 'react';
 import { logIn, makeHeaders } from './auth';
 import { useNavigate } from 'react-router-dom';
 
@@ -26,9 +25,9 @@ const RegistrationForm = () => {
   
       if (response.ok) {
         const data = await response.json();
-        console.log(data.token);
+        console.log(data.data.token);
         console.log(data);
-        logIn(data.token);
+        logIn(data.data.token);
 
         navigate('/userdashboard');
       } else {

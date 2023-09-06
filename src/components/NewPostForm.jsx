@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { makeHeaders } from './auth.jsx';
 
 const APIURL = 'https://strangers-things.herokuapp.com/api/2302-ACC-ET-WEB-PT-D';
 
-const NewPostForm = () => {
+const NewPostForm = ({onPostCreated}) => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -30,6 +30,16 @@ const NewPostForm = () => {
 
       if (result.success) {
         console.log('Post created:', result.data);
+
+        onPostCreated();
+
+        setFormData({
+          title: '',
+          description: '',
+          price: '',
+          location: '',
+          willDeliver: false,
+        });
       } else {
         console.error('Error:', result.error);
       }
