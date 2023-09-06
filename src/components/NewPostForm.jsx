@@ -1,89 +1,92 @@
-import React from 'react';
-import { makeHeaders } from './auth'; // Import makeHeaders from your auth module
+import React, { useState } from 'react';
+import { makeHeaders } from './auth.jsx';
 
-const APIURL = `https://strangers-things.herokuapp.com/api/2302-ACC-ET-WEB-PT-D`;
+const APIURL = 'https://strangers-things.herokuapp.com/api/2302-ACC-ET-WEB-PT-D';
 
-const NewPostForm = ({ onPostCreated }) => {
-  
+const NewPostForm = () => {
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    price: '',
+    location: '',
+    willDeliver: false,
+  });
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const headers = makeHeaders();
+
     try {
-      const response = await fetch('https://strangers-things.herokuapp.com/api/2302-ACC-ET-WEB-PT-D/posts', {
+      const response = await fetch(`${APIURL}/posts`, {
         method: 'POST',
-        headers: makeHeaders(), // Use makeHeaders to include the Authorization header
+        headers,
         body: JSON.stringify({
-          post: {
-            title: formData.get('title'),
-            description: formData.get('description'),
-            price: formData.get('price'),
-            location: formData.get('location'),
-            willDeliver: formData.get('willDeliver'),
-          },
+          post: formData,
         }),
       });
 
-      if (response.ok) {
-        const newPost = await response.json();
-        console.log(newPost);
-        onPostCreated(newPost);
+      const result = await response.json();
 
+      if (result.success) {
+        console.log('Post created:', result.data);
       } else {
-        // Handle error
-        console.error('Error creating post:', response.statusText);
+        console.error('Error:', result.error);
       }
     } catch (error) {
-      console.error('Error creating post:', error);
+      console.error('There was an issue submitting your form:', error);
     }
+  };
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>Title</label>
       <input
         type="text"
         name="title"
-        
-        
+        value={formData.title}
+        onChange={handleChange}
+        placeholder="Title"
         required
       />
-
-      <label>Description</label>
       <textarea
         name="description"
-        
-        
+        value={formData.description}
+        onChange={handleChange}
+        placeholder="Description"
         required
       ></textarea>
-
-      <label>Price</label>
       <input
         type="text"
         name="price"
-        
-        
+        value={formData.price}
+        onChange={handleChange}
+        placeholder="Price"
         required
       />
-      <label>Price</label>
       <input
         type="text"
-        name="price"
-        
-        
-        required
+        name="location"
+        value={formData.location}
+        onChange={handleChange}
+        placeholder="Location (Optional)"
       />
-
       <label>
-        Will Deliver
-        </label>
+        Will Deliver?
         <input
           type="checkbox"
           name="willDeliver"
-          
-         
+          checked={formData.willDeliver}
+          onChange={handleChange}
         />
-
+      </label>
       <button type="submit">Create Post</button>
     </form>
   );

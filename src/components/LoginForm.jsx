@@ -30,7 +30,7 @@ const LoginForm = () => {
         const data = await response.json();
         logIn(data.data.token);
         console.log('Logged in with token:', data.data.token);
-        navigate('/authpostsview');
+        navigate('/userdashboard');
       } else {
         // Handle login error
       }

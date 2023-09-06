@@ -1,40 +1,44 @@
-// MessageForm.js
 import React, { useState } from 'react';
-import { makeHeaders } from './auth';
+import { getToken, makeHeaders } from './auth';
 
-const MessageForm = ({ postId, onMessageSent }) => {
+const APIURL = `https://strangers-things.herokuapp.com/api/2302-ACC-ET-WEB-PT-D`;
+
+const MessageForm = ({ postID, onMessageSent }) => {
   const [content, setContent] = useState('');
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const response = await fetch(`${APIURL}/posts/${postId}/messages`, {
+      const response = await fetch(`${APIURL}/posts/${postID}/messages`, {
         method: 'POST',
         headers: makeHeaders(),
-        body: JSON.stringify({ message: { content } }),
+        body: JSON.stringify({
+          message: { content }
+        }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        onMessageSent(data.message); 
-        setContent('');
+      const result = await response.json();
+      if (result.success) {
+        onMessageSent(result.data.message);
+        setContent(''); // Reset the input
       } else {
-    
+        console.error('Failed to send message:', result.error.message);
       }
-    } catch (error) {
-      console.error('Error sending message:', error);
+    } catch (err) {
+      console.error(err);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <textarea
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        placeholder="Type your message..."
-        required
-      ></textarea>
+      <label>
+        Message:
+        <input
+          type="text"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+      </label>
       <button type="submit">Send Message</button>
     </form>
   );

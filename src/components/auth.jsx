@@ -37,11 +37,16 @@ export const isLoggedIn = () => {
 
 export const makeHeaders = () => {
   const headers = new Headers();
+  headers.set('Content-Type', 'application/json'); // Required for the API
+  
   const token = getToken();
   console.log('Token:', token); // Check if the token is retrieved correctly
+  
   if (token) {
     headers.set('Authorization', `Bearer ${token}`);
   }
+
   return headers;
 };
+
 
