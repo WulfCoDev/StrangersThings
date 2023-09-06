@@ -10,8 +10,8 @@ const Navbar = () => {
         <li>
           {isLoggedIn() ? (
             <>
-              <LogoutButton /> {/* Display the LogoutButton component */}
-              <Link to="/userdashboard">Profile</Link> {/* Display "Profile" link when logged in */}
+              <LogoutButton /> 
+              <Link to="/userdashboard">Profile</Link>
             </>
           ) : (
             <Link to="/logindashboard">Register or Login</Link>
@@ -20,7 +20,7 @@ const Navbar = () => {
         <li>
           <Link to="/">Posts</Link>
         </li>
-        {/* Add more navigation links here */}
+        
       </ul>
     </nav>
   );

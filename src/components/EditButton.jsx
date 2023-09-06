@@ -7,7 +7,7 @@ const EditButton = ({ postID }) => {
     navigate(`/edit-post/${postID}`);
   };
 
-  return <button onClick={handleEdit}>Edit</button>;
+  return <button className='edit-button' onClick={handleEdit}>Edit</button>;
 };
 
 export default EditButton;

@@ -47,6 +47,7 @@ const NewPostForm = () => {
   };
 
   return (
+    <div className='new-post-form'>
     <form onSubmit={handleSubmit}>
       <input
         type="text"
@@ -89,6 +90,7 @@ const NewPostForm = () => {
       </label>
       <button type="submit">Create Post</button>
     </form>
+    </div>
   );
 };
 

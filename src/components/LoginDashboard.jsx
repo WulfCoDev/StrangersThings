@@ -4,7 +4,7 @@ import LoginForm from './LoginForm';
 
 const LoginDashboard = () => {
   return (
-    <div>
+    <div className='login-dashboard'>
       <h1>Registration</h1>
       <RegistrationForm />
 

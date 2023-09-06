@@ -40,11 +40,13 @@ const LoginForm = () => {
   };
 
   return (
+    <div className='login-form'>
     <form onSubmit={handleLogin}>
       <input type="text" placeholder="Username" name="username" required />
       <input type="password" placeholder="Password" name="password" required />
       <button type="submit">Login</button>
     </form>
+    </div>
   );
 };
 

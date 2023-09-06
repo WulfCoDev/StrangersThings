@@ -28,10 +28,10 @@ const UserDashboard = () => {
       if (response.ok) {
         const data = await response.json();
 
-        // Assuming the data structure is as follows
+      
         const { cohort, messages, posts, username } = data.data;
 
-        // Now you can access and display this data in your component
+      
         setUserData({
           cohort,
           messages,
@@ -40,7 +40,7 @@ const UserDashboard = () => {
         });
       } else {
         console.error('API Error:', response.status, response.statusText);
-        // Handle error
+      
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -48,12 +48,12 @@ const UserDashboard = () => {
   };
 
   const handleEdit = async (postID) => {
-    // Navigate to Edit Post page and pass the post ID
+
     navigate(`/edit-post/${postID}`);
   };
 
   const handleDelete = (deletedPostID) => {
-    // Remove the deleted post from local state
+  
     setUserData((prevState) => ({
       ...prevState,
       posts: prevState.posts.filter((post) => post._id !== deletedPostID),
@@ -65,16 +65,17 @@ const UserDashboard = () => {
   };
 
   return (
-    <div>
+    <div className='user-dashboard'>
       {userData ? (
         <div>
           <h1>Welcome, {userData.username}!</h1>
+          <h3>Cohort: {userData.cohort}</h3>
           <NewPostForm onPostCreated={handlePostCreated} />
           <h2>Your Posts:</h2>
           <ul>
           {userData && userData.posts
   ? userData.posts
-      .filter((post) => post.active)  // Notice the change here
+      .filter((post) => post.active)
       .map((post) => (
         <li key={post._id}>
           {post.title} - {post.description} - {post.price}
@@ -84,7 +85,17 @@ const UserDashboard = () => {
       ))
   : null}
           </ul>
-          {/* ... (rest of your code for messages etc.) */}
+          <h2>Your Messages:</h2>
+          <ul>
+            {userData.messages.map((message) => (
+              <li key={message._id}>
+                <strong>Post:</strong> {message.post.title} <br />
+                <strong>From:</strong> {message.fromUser.username} <br />
+                <strong>Content:</strong> {message.content} <br />
+              </li>
+            ))}
+          </ul>
+
         </div>
       ) : (
         <p>Loading user data...</p>

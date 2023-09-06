@@ -1,5 +1,5 @@
 import React from 'react';
-import { logIn } from './auth';
+import { logIn, makeHeaders } from './auth';
 import { useNavigate } from 'react-router-dom';
 
 const APIURL = `https://strangers-things.herokuapp.com/api/2302-ACC-ET-WEB-PT-D`;
@@ -20,9 +20,7 @@ const RegistrationForm = () => {
     try {
       const response = await fetch(APIURL + '/users/register', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: makeHeaders(),
         body: JSON.stringify(registrationData),
       });
   
@@ -42,12 +40,14 @@ const RegistrationForm = () => {
   };
 
   return (
+    <div className='registration-form'>
     <form onSubmit={handleRegistration}>
       <input type="text" placeholder='Username' name="username" minLength="3" required />
       <input type="password" placeholder='Password' name="password" minLength="6" required />
       <input type="password" placeholder='Confirm Password' name="confirmPassword" required />
       <button type="submit">Register</button>
     </form>
+    </div>
   );
 };
 

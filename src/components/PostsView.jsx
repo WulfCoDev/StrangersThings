@@ -4,6 +4,7 @@ import NewPostForm from './NewPostForm';
 import EditButton from './EditButton';
 import DeleteButton from './DeleteButton';
 import MessageForm from './MessageForm';
+import '../App.css';
 
 const APIURL = `https://strangers-things.herokuapp.com/api/2302-ACC-ET-WEB-PT-D`;
 
@@ -40,7 +41,7 @@ function PostsView() {
     setPosts((prevPosts) => prevPosts.filter((post) => post._id !== deletedPostID));
   };
 
-  const toggleForm = () => {  // New function
+  const toggleForm = () => {
     setFormVisible(!isFormVisible);
   };
 
@@ -51,26 +52,26 @@ function PostsView() {
   };
 
   const handleNewMessage = (newMessage) => {
-    // Update state or do something with the new message
+
     console.log('New message:', newMessage);
   };
 
   const postItems = posts.map((post) => (
-    <div key={post._id}>
+    <div className='post-item' key={post._id}>
       <h2>{post.title}</h2>
       <p>Price: {post.price}</p>
       <p>Description: {post.description}</p>
-      {post.isAuthor && <EditButton postID={post._id} />}
-      {post.isAuthor && <DeleteButton postID={post._id} onDelete={handlePostDeleted} />}
+      {post.isAuthor && <EditButton className='edit-button' postID={post._id} />}
+      {post.isAuthor && <DeleteButton className='delete-button' postID={post._id} onDelete={handlePostDeleted} />}
       <button onClick={toggleMessageForm}>Send Message</button>
       {isMessageFormVisible && <MessageForm postID={post._id} onMessageSent={handleNewMessage} />}
     </div>
   ));
 
   return (
-    <div>
-      <button onClick={toggleForm}>Create New Post</button>  {/* New button */}
-      {isFormVisible && <NewPostForm onPostCreated={handlePostCreated} />}  {/* Conditional rendering */}
+    <div className='posts-view'>
+      <button onClick={toggleForm}>Create New Post</button>
+      {isFormVisible && <NewPostForm onPostCreated={handlePostCreated} />}
       {postItems}
     </div>
   );

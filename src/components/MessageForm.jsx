@@ -30,6 +30,7 @@ const MessageForm = ({ postID, onMessageSent }) => {
   };
 
   return (
+    <div className='message-form'>
     <form onSubmit={handleSubmit}>
       <label>
         Message:
@@ -41,6 +42,7 @@ const MessageForm = ({ postID, onMessageSent }) => {
       </label>
       <button type="submit">Send Message</button>
     </form>
+    </div>
   );
 };
 
