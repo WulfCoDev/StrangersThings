@@ -99,6 +99,10 @@ body {
   margin-bottom: 1rem;
 }
 
+.user-dashboard ul {
+  list-style-type: none;
+}
+
 /* NewPostForm Styles */
 .new-post-form {
   background-color: #ffffff;
